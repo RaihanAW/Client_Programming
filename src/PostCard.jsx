@@ -23,7 +23,7 @@ function PostCard(props) {
 
 export default PostCard
 
-/*
+
 function UserCard(props) {
   const {name, email, street, city, ...rest} = props;
   const [clicked, setClicked] = useState(false);
@@ -52,4 +52,3 @@ function UserCard(props) {
     </div>
   )
 }
-*/
