@@ -28,7 +28,7 @@ function Exercise() {
           User Cards
         </h1>
         <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 max-h-fit">
-          {getsUsers.map((user, index) => <UserCard key={index} {...post}/>)}
+          {getsUsers.map((id, index) => <UserCard key={index} {...post}/>)}
         </div>
       </div>
     </>
