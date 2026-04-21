@@ -25,10 +25,10 @@ function Exercise() {
     <>
       <div className="min-h-screen bg-gray-100 p-6">
         <h1 className="text-3xl font-bold text-center mb-6">
-          Post Cards
+          User Cards
         </h1>
         <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 max-h-fit">
-          {postsData.map((post, index) => <PostCard key={index} {...post}/>)}
+          {userData.map((post, index) => <UserCard key={index} {...post}/>)}
         </div>
       </div>
     </>
