@@ -1,3 +1,4 @@
+/*
 export const users = [
     {
         name: "Raihan" ,
@@ -48,7 +49,8 @@ export const newUsers = [
     },
   ]
 
-/*
+*/
+
 const city = "Los Angeles";
 const street = "Beverly Hills st.";
 
@@ -68,4 +70,3 @@ export const getUsers = async () => {
     
   }
 }
-*/
