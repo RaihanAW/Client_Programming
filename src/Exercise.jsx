@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import UserCard from './UserCard';
 import {getUsers} from './Services';
-import "./index.css";
 
 function Exercise() {
   const [users, setUsers] = useState([]);
