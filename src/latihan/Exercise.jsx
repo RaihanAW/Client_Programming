@@ -3,7 +3,7 @@ import UserCard from './UserCard';
 import {getUsers} from './Services';
 /* UTS */
 import PostCard from './PostCard';
-import { postsData } from './postsData';
+import { postsData } from '../postsData';
 
 function Exercise() {
   /*
