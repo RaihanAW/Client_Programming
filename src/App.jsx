@@ -2,6 +2,7 @@ import "./App.css";
 import SignInPage from "./pages/signIn";
 import SignUpPage from "./pages/signUp";
 import ErrorPage from "./pages/error";
+import DashboardPage from "./pages/dashboard";
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     {
       path: "/",
       element: (
-        <div className="flex justify-center items-center min-h-screen">
+        /*<div className="flex justify-center items-center min-h-screen">
           <Link to="/login" className="p-2 m-5 bg-primary text-white">
             Login
           </Link>
@@ -17,7 +18,8 @@ function App() {
           <Link to="/register" className="p-2 m-5 bg-primary text-white">
             Register
           </Link>
-        </div>
+        </div>*/
+        <DashboardPage />
       ),
       errorElement: <ErrorPage />
     },
