@@ -1,6 +1,6 @@
 import React from 'react'
 import LabeledInput from '../Elements/LabeledInput'
-import Checkbox from '../Elements/Checkbox'
+import CheckBox from '@mui/icons-material/CheckBox'
 import Button from '../Elements/Button'
 import { Link } from 'react-router-dom'
 

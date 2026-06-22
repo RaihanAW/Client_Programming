@@ -7,6 +7,8 @@ import CardUpcomingBill from '../components/Fragments/CardUpcomingBill'
 import CardRecentTransaction from '../components/Fragments/CardRecentTransaction'
 import CardStatistic from '../components/Fragments/CardStatistic'
 import CardExpenseBreakdown from '../components/Fragments/CardExpenseBreakdown'
+import { useState, useEffect } from 'react'
+import { goalService } from '../services/dataService'
 import { 
     transactions, 
     bills, 
@@ -17,6 +19,26 @@ import {
 } from '../data'
 
 function DashboardPage() {
+
+  const [goals, setGoals] = useState({});
+
+  const fetchGoals = async () => {
+    try {
+      const data = await goalService();
+      setGoals(data);
+    } catch (err) {
+      console.error("Gagal mengambil data goals:", err);
+      if (err.status === 401) {
+        logout();
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchGoals();
+  }, []);
+  
+
   return (
     <>
 	    <MainLayout>
