@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from '../Elements/Input';
-import CheckBox from '../Elements/CheckBox';
+import Checkbox from '../Elements/Checkbox';
 import Button from '../Elements/Button';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -75,14 +75,14 @@ function FormSignIn({ onSubmit }) {
                   /> 
                 </div>
 
-                {/* CHECKBOX */}
+                {/* Checkbox */}
                 <div className="mb-3">
                   <Field name="status">
                     {({ field }) => (
-                      <CheckBox
+                      <Checkbox
                         {...field}
                         id="status"
-                        type="checkbox"
+                        type="Checkbox"
                         checked={field.value}
                         label="Keep me signed in"
                       />
