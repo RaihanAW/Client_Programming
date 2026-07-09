@@ -36,7 +36,6 @@ function MainLayout(props) {
   const {theme, setTheme} = useContext(ThemeContext);
   const { user, logout } = useContext(AuthContext);
 
-  // SOAL 5 - Backdrop + CircularProgress ditampilkan selama proses logout berlangsung
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleLogout = async () => {
@@ -101,7 +100,7 @@ function MainLayout(props) {
                         onClick={() => setTheme(t)}
                         ></div>
                     ))}
-                    {/* SOAL 6 - toggle dark/light mode diletakkan di bawah navbar/menu */}
+
                     <DarkModeToggle />
                 </div>
             </div>
