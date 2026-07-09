@@ -1,64 +1,123 @@
 import React from 'react'
 import LabeledInput from '../Elements/LabeledInput'
-import Checkbox from '../Elements/Checkbox'
 import Button from '../Elements/Button'
 import { Link } from 'react-router-dom'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 
-function FormSignIn() {
+const SignUpSchema = Yup.object().shape({
+  name: Yup.string().required("Nama wajib diisi"),
+  email: Yup.string().email("Email tidak valid").required("Email wajib diisi"),
+  password: Yup.string()
+    .min(6, "Password minimal 6 karakter")
+    .required("Password wajib diisi"),
+});
+
+function FormSignUp({ onSubmit }) {
   return (
     <>
     {/* form start */}
     <div className="mt-16">
-        <form action="">
-          <div className="mb-6">
-            <LabeledInput
-                label = "Name"
-                id = "name"
-                type = "text"
-                placeholder = "Andi"
-                name = "name"
-            />
-            </div>
+
+      <Formik
+        initialValues={{
+          name: "",
+          email: "",
+          password: "",
+          status: false,
+        }}
+        validationSchema={SignUpSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            await onSubmit(values.name, values.email, values.password);
+          } finally {
+            setSubmitting(false);
+          }
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            {/* NAME */}
             <div className="mb-6">
-            <LabeledInput
-                label = "Email Adress"
-                id = "email"
-                type = "email"
-                placeholder = "hello@example.com"
-                name = "email"
-            />
+              <Field name="name">
+                {({ field }) => (
+                  <LabeledInput
+                    {...field}
+                    id="name"
+                    type="text"
+                    label="Name"
+                    placeholder="Raihan"
+                    name="name"
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                name="name"
+                component="p"
+                className="text-red-500 text-xs mt-1"
+              />
             </div>
+
+            {/* EMAIL */}
             <div className="mb-6">
-            <LabeledInput
-                label = "Password"
-                id = "password"
-                type = "password"
-                placeholder = "***********"
-                name = "password"
-            />
+              <Field name="email">
+                {({ field }) => (
+                  <LabeledInput
+                    {...field}
+                    id="email"
+                    type="email"
+                    label="Email Address"
+                    placeholder="hello@example.com"
+                    name="email"
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                name="email"
+                component="p"
+                className="text-red-500 text-xs mt-1"
+              />
             </div>
+
+            {/* PASSWORD */}
             <div className="mb-6">
-            <Checkbox
-                label = "Keep me signed in"
-                id = "status"
-                type = "checkbox"
-                name = "status"
-            />
+              <Field name="password">
+                {({ field }) => (
+                  <LabeledInput
+                    {...field}
+                    id="password"
+                    type="password"
+                    label="Password"
+                    placeholder="●●●●●●●●●●●●●●"
+                    name="password"
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                name="password"
+                component="p"
+                className="text-red-500 text-xs mt-1"
+              />
             </div>
-            <div className="flex justify-center">
+
+            <div className="flex justify-center dark:text-gray-300">
               by continuing, you agree to our
               <div className="text-primary pl-2">
                 term of service
               </div>
             </div>
-            <Button type="button">Sign Up</Button>
-        </form>
-        </div>
-        {/* form end */}
+
+            {/* BUTTON */}
+            <Button>{isSubmitting ? "Loading..." : "Register"}</Button>
+          </Form>
+        )}
+      </Formik>
+    </div>
+    {/* form end */}
         {/* teks start */}
         <div className="my-9 px-7 flex flex-col justify-center items-center text-xs text-gray-03">
         <div className="border border-gray-05 w-full"></div>
-        <div className="px-2 *:bg-special-mainBg absolute"> or sign in with</div>
+        <div className="px-2 bg-special-mainBg dark:bg-gray-900 absolute"> or sign in with</div>
         </div>
         {/* teks end */}
         {/* sign in with google start */}
@@ -95,7 +154,7 @@ function FormSignIn() {
         </div>
         {/* sign in with google end */}
         {/* link start */}
-        <div className="flex justify-center text-sm text-gray-01">
+        <div className="flex justify-center text-sm text-gray-01 dark:text-gray-300">
           Already have an account?
           <Link to="/login" className="text-primary text-sm font-bold pl-2">
           log in here!
@@ -106,4 +165,4 @@ function FormSignIn() {
   )
 }
 
-export default FormSignIn
+export default FormSignUp

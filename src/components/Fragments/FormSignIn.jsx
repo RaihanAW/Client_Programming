@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../Elements/Input';
+import LabeledInput from '../Elements/LabeledInput';
 import Checkbox from '../Elements/Checkbox';
 import Button from '../Elements/Button';
 import { Link } from 'react-router-dom';
@@ -39,12 +39,13 @@ function FormSignIn({ onSubmit }) {
                 <div className="mb-6">
                   <Field name="email">
                     {({ field }) => (
-                      <Input
+                      <LabeledInput
                         {...field}
                         id="email"
                         type="email"
                         label="Email Address"
                         placeholder="hello@example.com"
+                        name="email"
                       />
                     )}
                   </Field>
@@ -59,12 +60,13 @@ function FormSignIn({ onSubmit }) {
                 <div className="mb-6">
                   <Field name="password">
                     {({ field }) => (
-                      <Input
+                      <LabeledInput
                         {...field}
                         id="password"
                         type="password"
                         label="Password"
                         placeholder="●●●●●●●●●●●●●●"
+                        name="password"
                       />
                     )}
                   </Field> 

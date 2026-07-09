@@ -8,6 +8,9 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../../context/themeContext"
 import { AuthContext } from "../../context/authContext";
 import { logoutService } from "../../services/authService";
+import DarkModeToggle from "../Elements/DarkModeToggle";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function MainLayout(props) {
   const { children } = props;
@@ -33,7 +36,11 @@ function MainLayout(props) {
   const {theme, setTheme} = useContext(ThemeContext);
   const { user, logout } = useContext(AuthContext);
 
+  // SOAL 5 - Backdrop + CircularProgress ditampilkan selama proses logout berlangsung
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
   const handleLogout = async () => {
+    setIsLoggingOut(true);
     try {
       await logoutService();
       logout(); 
@@ -42,11 +49,22 @@ function MainLayout(props) {
       if (err.status === 401) {
         logout();
       }
+    } finally {
+      setIsLoggingOut(false);
     }
   };
   
   return (
     <>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (t) => t.zIndex.drawer + 1 }}
+        open={isLoggingOut}
+      >
+        <div className="flex flex-col items-center gap-3">
+          <CircularProgress color="inherit" />
+          <span>Logging Out</span>
+        </div>
+      </Backdrop>
 	    <div className={`flex min-h-screen ${theme.name}`}>
 			<aside className="bg-black w-28 sm:w-64 text-special-bg2
             flex flex-col justify-between px-7 py-12">
@@ -83,6 +101,8 @@ function MainLayout(props) {
                         onClick={() => setTheme(t)}
                         ></div>
                     ))}
+                    {/* SOAL 6 - toggle dark/light mode diletakkan di bawah navbar/menu */}
+                    <DarkModeToggle />
                 </div>
             </div>
                 <div>
@@ -103,8 +123,8 @@ function MainLayout(props) {
                     </div>
                 </div>
             </aside>
-			<div className="bg-special-mainBg flex-1 flex flex-col">
-                <header className="border, border-b border-gray-05 px-6 py-7 flex justify-between items-center">
+			<div className="bg-special-mainBg dark:bg-gray-900 dark:text-gray-100 flex-1 flex flex-col">
+                <header className="border, border-b border-gray-05 dark:border-gray-700 px-6 py-7 flex justify-between items-center">
                 <div className="flex items-center">
                     <div className="font-bold text-2xl me-6">{user.name}</div> 
                         <div className="text-gray-03 hidden sm:block">May 19, 2023</div> 
@@ -113,7 +133,7 @@ function MainLayout(props) {
                         <div className="me-10">
                             <CircleNotificationsIcon className="text-primary scale-150" />
                         </div> 
-                    <Input backgroundColor="bg-white" border="border-white" />
+                    <Input backgroundColor="bg-white dark:bg-gray-800" border="border-white dark:border-gray-700" />
                 </div>
                 </header>
 			    <main className="flex-1 px-6 py-4">{children}</main>

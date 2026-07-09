@@ -6,14 +6,16 @@ import CardUpcomingBill from '../components/Fragments/CardUpcomingBill'
 import CardRecentTransaction from '../components/Fragments/CardRecentTransaction'
 import CardStatistic from '../components/Fragments/CardStatistic'
 import CardExpenseBreakdown from '../components/Fragments/CardExpenseBreakdown'
-import { transactions, bills, expensesBreakdowns, balances, goals, expensesStatistics } from '../data'
+import { transactions, expensesBreakdowns, balances, expensesStatistics } from '../data'
 import { useContext, useEffect, useState } from 'react'
-import { goalService } from '../services/dataService'
+import { goalService, billService } from '../services/dataService'
 import { AuthContext } from '../context/authContext'
 import AppSnackbar from '../components/Elements/AppSnackbar'
 
 function dashboard() {
     const [goals, setGoals] = useState({});
+    // SOAL 4 - null artinya data belum selesai di-fetch -> tampilkan loader
+    const [bills, setBills] = useState(null);
     const { logout } = useContext(AuthContext);
 
     const [snackbar, setSnackbar] = useState({
@@ -41,9 +43,26 @@ function dashboard() {
         }
       }
     };
+
+    const fetchBills = async () => {
+      try {
+        const data = await billService();
+        setBills(data);
+      } catch (err) {
+        setSnackbar({
+          open: true,
+          message: "Gagal mengambil data upcoming bill",
+          severity: "error",
+        });
+        if (err.status === 401) {
+          logout();
+        }
+      }
+    };
   
     useEffect(() => {
       fetchGoals();
+      fetchBills();
     }, []);
 
   return (

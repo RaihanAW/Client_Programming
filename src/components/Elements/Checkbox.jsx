@@ -11,7 +11,7 @@ function Checkbox(props) {
         />
         <label 
             htmlFor={id} 
-            className="text-sm text-gray-01 mb-2">
+            className="text-sm text-gray-01 dark:text-gray-300 mb-2">
             {label}
         </label>
     </>
