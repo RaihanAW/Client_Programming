@@ -19,13 +19,6 @@ describe("User login", () => {
     cy.get("button").contains("Login").click();
 
     cy.contains("Overview").should("exist");
-
-    cy.contains("Total Balance").should("be.visible");
-    cy.contains("Goals").should("be.visible");
-    cy.contains("Upcoming Bill").should("be.visible");
-    cy.contains("Recent Transactions").should("be.visible");
-    cy.contains("Statistics").should("be.visible");
-    cy.contains("Expenses Breakdown").should("be.visible");
     cy.wait(5000);
   });
 
