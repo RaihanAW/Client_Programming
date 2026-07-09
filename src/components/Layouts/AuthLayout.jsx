@@ -15,7 +15,6 @@ function AuthLayout(props) {
         <Logo/>
         {children}
 
-        {/* toggle dark/light mode, diletakkan di bawah form login/register */}
         <div className="flex justify-center mt-4">
           <DarkModeToggle />
         </div>
